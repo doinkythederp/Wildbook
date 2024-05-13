@@ -22,6 +22,16 @@ import javax.servlet.http.HttpServletRequest;
 
 
 public class ShepherdProperties {
+  static {
+    String catalinaHome = System.getenv("CATALINA_HOME");
+    if (catalinaHome == null) {
+      System.out.println("CATALINA_HOME is null, assuming that properties should be loaded relative to the current working directory.");
+      catalinaHome = "";
+    }
+    Path catalinaHomePath = Paths.get(catalinaHome).toAbsolutePath();
+    System.out.println("Properties will be loaded relative to: " + catalinaHomePath);
+    propertiesBase = catalinaHomePath;
+  }
 
   public static final String[] overrideOrgsArr = {"indocet"};
   // set for easy .contains() checking
@@ -30,7 +40,7 @@ public class ShepherdProperties {
   // The "catalina.home" property is the path to the Tomcat install ("Catalina Server").
   // This is often set as the working directory.
   /** Property files are resolved relative to this directory. */
-  private static final Path propertiesBase = Paths.get(System.getenv("CATALINA_HOME"));
+  private static final Path propertiesBase;
 
   public static Properties getProperties(String fileName){
     return getProperties(fileName, "en");
