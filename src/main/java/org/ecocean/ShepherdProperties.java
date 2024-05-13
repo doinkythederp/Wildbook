@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ShepherdProperties {
   static {
+    // CATALINA_HOME is set by tomcat as the path to its installation directory
     String catalinaHome = System.getenv("CATALINA_HOME");
     if (catalinaHome == null) {
       System.out.println("CATALINA_HOME is null, assuming that properties should be loaded relative to the current working directory.");
