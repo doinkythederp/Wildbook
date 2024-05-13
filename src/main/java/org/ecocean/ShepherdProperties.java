@@ -30,7 +30,7 @@ public class ShepherdProperties {
   // The "catalina.home" property is the path to the Tomcat install ("Catalina Server").
   // This is often set as the working directory.
   /** Property files are resolved relative to this directory. */
-  private static final Path propertiesBase = Paths.get(System.getProperty("catalina.home"));
+  private static final Path propertiesBase = Paths.get(System.getenv("CATALINA_HOME"));
 
   public static Properties getProperties(String fileName){
     return getProperties(fileName, "en");
